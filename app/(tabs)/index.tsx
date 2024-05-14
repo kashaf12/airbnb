@@ -1,9 +1,11 @@
+import { Text, View } from "react-native";
 import React, { useMemo, useState } from "react";
-import { View } from "react-native";
-import { Stack } from "expo-router";
+import ListingsBottomSheet from "@/components/ListingsBottomSheet";
 import listingsData from "@/assets/data/airbnb-listings.json";
 import listingsDataGeo from "@/assets/data/airbnb-listings.geo.json";
+import { Link, Stack } from "expo-router";
 import ExploreHeader from "@/components/ExploreHeader";
+import ListingsMap from "@/components/ListingsMap";
 
 const Page = () => {
   const items = useMemo(() => listingsData as any, []);
@@ -13,6 +15,7 @@ const Page = () => {
   const onDataChanged = (category: string) => {
     setCategory(category);
   };
+
   return (
     <View style={{ flex: 1, marginTop: 80 }}>
       {/* Define pour custom header */}
@@ -21,8 +24,8 @@ const Page = () => {
           header: () => <ExploreHeader onCategoryChanged={onDataChanged} />,
         }}
       />
-      {/* <ListingsMap listings={getoItems} />
-      <ListingsBottomSheet listings={items} category={category} /> */}
+      <ListingsMap listings={getoItems} />
+      <ListingsBottomSheet listings={items} category={category} />
     </View>
   );
 };

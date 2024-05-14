@@ -8,6 +8,7 @@ import { TouchableOpacity } from "react-native";
 import Constants from "expo-constants";
 import * as SecureStore from "expo-secure-store";
 import { useAuth, ClerkProvider } from "@clerk/clerk-expo";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 const tokenCache = {
   async getToken(key: string) {
@@ -67,7 +68,9 @@ export default function RootLayout() {
       publishableKey={Constants?.expoConfig?.extra?.clerkPublishableKey}
       tokenCache={tokenCache}
     >
-      <RootLayoutNav />
+      <GestureHandlerRootView style={{ flex: 1 }}>
+        <RootLayoutNav />
+      </GestureHandlerRootView>
     </ClerkProvider>
   );
 }
